@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
-    /*children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'regist', component: RegisterComponent },
-    ],*/
+    children: [
+      { path: 'login', component: ModalComponent },
+      { path: 'register', component: ModalComponent },
+    ],
   },
 ];
 
