@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms'
 // Materials
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { ModalComponent } from './components/modal/modal.component';
     LandingComponent,
     ButtonComponent,
     ModalComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { ModalComponent } from './components/modal/modal.component';
     //Materials
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule
     
   ],
   providers: [],
