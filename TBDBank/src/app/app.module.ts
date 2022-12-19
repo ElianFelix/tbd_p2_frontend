@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { ButtonComponent } from './components/button/button.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ButtonComponent } from './components/button/button.component';
     FooterComponent,
     LandingComponent,
     ButtonComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
