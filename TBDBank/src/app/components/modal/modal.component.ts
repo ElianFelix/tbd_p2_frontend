@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-modal',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
+
+  constructor(private location: Location){}
+
+  @Input() title: string = '';
+  
+  return() {
+    this.location.back();
+  }
 
 }
