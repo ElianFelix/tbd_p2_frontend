@@ -1,21 +1,15 @@
 <div class="wrapper" (click)="return()"></div>
 <div class="app-modal container">
-    <div class="row">
-      <div class="col">
-        <mat-card class="m-5 shadow-lg">
-          <mat-card-header class="justify-content-center pb-3 mb-3">
-            <mat-card-title
-              ><h1>{{ title }}</h1></mat-card-title
-            >
-          </mat-card-header>
-            <div class="container p-3 mx-2">
-              <div class="row">
-                <div class="col">
-                    <ng-content></ng-content>
-                </div>
-              </div>
-            </div>
-        </mat-card>
-      </div>
+  <div class="row">
+    <div class="col">
+      <mat-card class="m-3 shadow-lg">
+        <mat-card-header class="justify-content-center pb-3 mb-3">
+          <mat-card-title
+            ><h1>{{ title }}</h1></mat-card-title
+          >
+        </mat-card-header>
+        <ng-content></ng-content>
+      </mat-card>
     </div>
   </div>
+</div>

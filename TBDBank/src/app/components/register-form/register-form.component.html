@@ -1,0 +1,70 @@
+<app-modal [title]="'Register'">
+  <div class="container text-center">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Outline form field</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            [formControl]="userNameControl"
+          />
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Outline form field</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            [formControl]="firstNameControl"
+          />
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Outline form field</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            [formControl]="lastNameControl"
+          />
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Outline form field</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            [formControl]="emailControl"
+          />
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Outline form field</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            [formControl]="passwordControl"
+          />
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <app-button [text]="'Register'"></app-button>
+  </div>
+</app-modal>
