@@ -3,11 +3,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 
 // Materials
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -18,7 +21,8 @@ import { LandingComponent } from './components/landing/landing.component';
 import { ButtonComponent } from './components/button/button.component';
 import { AccountListComponent } from './components/account-list/account-list.component';
 import { ModalComponent } from './components/modal/modal.component';
-
+import { HeaderComponent } from './components/header/header.component';
+import { TransactionsComponent } from './components/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,8 @@ import { ModalComponent } from './components/modal/modal.component';
     ButtonComponent,
     AccountListComponent,
     ModalComponent,
+    HeaderComponent,
+    TransactionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,10 +43,12 @@ import { ModalComponent } from './components/modal/modal.component';
     //Materials
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonModule
-    
+    MatButtonModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatPaginatorModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
