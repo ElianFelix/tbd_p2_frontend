@@ -1,67 +1,63 @@
 <app-modal [title]="'Register'">
   <div class="container text-center">
     <div class="row justify-content-center">
-      <div class="col-4">
+      <div class="col">
         <mat-form-field appearance="outline">
-          <mat-label>Outline form field</mat-label>
+          <mat-label>Username*</mat-label>
           <input
             matInput
-            placeholder="Placeholder"
+            placeholder="Enter a username"
             [formControl]="userNameControl"
           />
-          <mat-hint>Hint</mat-hint>
         </mat-form-field>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-4">
+      <div class="col">
         <mat-form-field appearance="outline">
-          <mat-label>Outline form field</mat-label>
+          <mat-label>First name</mat-label>
           <input
             matInput
-            placeholder="Placeholder"
+            placeholder="Enter first name"
             [formControl]="firstNameControl"
           />
-          <mat-hint>Hint</mat-hint>
         </mat-form-field>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-4">
+      <div class="col">
         <mat-form-field appearance="outline">
-          <mat-label>Outline form field</mat-label>
+          <mat-label>Last name</mat-label>
           <input
             matInput
-            placeholder="Placeholder"
+            placeholder="Enter last name"
             [formControl]="lastNameControl"
           />
-          <mat-hint>Hint</mat-hint>
         </mat-form-field>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-4">
+      <div class="col">
         <mat-form-field appearance="outline">
-          <mat-label>Outline form field</mat-label>
+          <mat-label>Email*</mat-label>
           <input
             matInput
-            placeholder="Placeholder"
+            placeholder="some@email"
             [formControl]="emailControl"
           />
-          <mat-hint>Hint</mat-hint>
         </mat-form-field>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-4">
+      <div class="col">
         <mat-form-field appearance="outline">
-          <mat-label>Outline form field</mat-label>
+          <mat-label>Password*</mat-label>
           <input
             matInput
-            placeholder="Placeholder"
+            type="password"
+            placeholder="NOT 1234"
             [formControl]="passwordControl"
           />
-          <mat-hint>Hint</mat-hint>
         </mat-form-field>
       </div>
     </div>
