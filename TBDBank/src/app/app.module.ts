@@ -17,6 +17,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { ButtonComponent } from './components/button/button.component';
 import { AccountListComponent } from './components/account-list/account-list.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { AccountListComponent } from './components/account-list/account-list.com
     LandingComponent,
     ButtonComponent,
     AccountListComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
