@@ -13,6 +13,9 @@ export class HeaderComponent {
     return this.router.url != '/';
   }
 
+  //TODO once login service added, change to logout if user exists
+  isLoggedin(){}
+
   toggleTheme() {
     if (document.body.getAttribute('data-theme')) {
       document.body.removeAttribute('data-theme');
