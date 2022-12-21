@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -19,8 +22,11 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { ButtonComponent } from './components/button/button.component';
+import { AccountListComponent } from './components/account-list/account-list.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { HeaderComponent } from './components/header/header.component';
+import { TransactionsComponent } from './components/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +34,11 @@ import { RegisterFormComponent } from './components/register-form/register-form.
     FooterComponent,
     LandingComponent,
     ButtonComponent,
+    AccountListComponent,
     ModalComponent,
     RegisterFormComponent,
+    HeaderComponent,
+    TransactionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +52,9 @@ import { RegisterFormComponent } from './components/register-form/register-form.
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent],

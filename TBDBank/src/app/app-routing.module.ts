@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { TransactionsComponent } from './components/transactions/transactions.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       { path: 'register', component: RegisterFormComponent },
     ],
   },
+  {
+    path: 'transactions',
+    component: TransactionsComponent
+  }
 ];
 
 @NgModule({
