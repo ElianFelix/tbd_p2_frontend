@@ -9,12 +9,17 @@ import { Account } from './account';
 })
 export class AccountListComponent {
 
-  private accounts: Account[];
+  private accounts!: Account[];
   private userId: number = 1;
+
+  get Accounts(): Account[] {
+    return this.accounts;
+  }
 
   constructor(private service: AccountService) {
     this.service = service;
-    this.accounts = service.getAccountsByUserId(this.userId);
+
+    service.getAccountsByUserId(this.userId).subscribe(data => this.accounts = data);
   }
 
 }
