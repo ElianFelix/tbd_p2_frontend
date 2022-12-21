@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { UsersService } from 'src/app/services/users.service';
+import { UserDetails } from '../../models/UserDetails';
 
 @Component({
   selector: 'app-register-form',
@@ -7,13 +10,35 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent {
-  userNameControl = new FormControl('');
+  registerForm = new FormGroup({
+    userName: new FormControl('', Validators.required),
 
-  firstNameControl = new FormControl('');
+    firstName: new FormControl(''),
 
-  lastNameControl = new FormControl('');
+    lastName: new FormControl(''),
 
-  emailControl = new FormControl('');
+    email: new FormControl('', Validators.required),
 
-  passwordControl = new FormControl('');
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+    ]),
+  });
+
+  constructor(private usersService: UsersService) {}
+
+  onSubmit() {
+    console.log(this.registerForm.value);
+    let userDetails: UserDetails = {
+      userName: this.registerForm.value.userName,
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+    };
+    console.log(userDetails);
+    this.usersService.registerUser(userDetails).subscribe((status) => {
+      console.log(status);
+    });
+  }
 }
