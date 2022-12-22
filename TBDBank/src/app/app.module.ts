@@ -27,6 +27,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
     RegisterFormComponent,
     HeaderComponent,
     TransactionsComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,

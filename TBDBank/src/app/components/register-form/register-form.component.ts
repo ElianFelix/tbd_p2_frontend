@@ -12,13 +12,9 @@ import { UserDetails } from '../../models/UserDetails';
 export class RegisterFormComponent {
   registerForm = new FormGroup({
     userName: new FormControl('', Validators.required),
-
     firstName: new FormControl(''),
-
     lastName: new FormControl(''),
-
     email: new FormControl('', Validators.required),
-
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
