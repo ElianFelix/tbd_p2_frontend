@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Account } from '../components/account-list/account';
 import { environment } from '../environment/environment';
 
@@ -11,7 +11,7 @@ export class AccountService {
 
   url: string = environment.API_URL;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   createNewAccount(account: Account): boolean {
 
@@ -21,21 +21,19 @@ export class AccountService {
       userId: account.userId
     }
 
-    this.http.post<string>(`${this.url}/accounts/new`, JSON.stringify(body));
+    // this.http.post<string>(`${this.url}/accounts/new`, JSON.stringify(body));
 
     return true;
 
   }
 
-  getAccountsByUserId(userId: number): Account[] {
+  getAccountsByUserId(userId: number): Observable<Account[]> {
 
-    let accounts: Account[] = [];
+    // return this.http.get<Account[]>(`${this.url}accounts/${userId}`);
 
-    this.http.get<Account[]>(`${this.url}accounts/${userId}`).subscribe(data => {
-      accounts = data;
-    });
-
-    return accounts;
+    // dummy data for testing
+    const accList = [new Account(1, 1, 1, 1), new Account(1, 1, 1, 1), new Account(1, 1, 1, 1), new Account(1, 1, 1, 1)];
+    return of(accList);
 
   }
 
