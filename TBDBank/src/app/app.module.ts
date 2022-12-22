@@ -22,6 +22,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
+import { TransactionComponent } from './components/transaction/transaction.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
     ModalComponent,
     HeaderComponent,
     TransactionsComponent,
+    TransactionComponent,
   ],
   imports: [
     BrowserModule,
