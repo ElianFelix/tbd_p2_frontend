@@ -29,16 +29,18 @@ export class RegisterFormComponent {
 
   onSubmit() {
     console.log(this.registerForm.value);
-    let userDetails: UserDetails = {
-      userName: this.registerForm.value.userName,
-      firstName: this.registerForm.value.firstName,
-      lastName: this.registerForm.value.lastName,
-      email: this.registerForm.value.email,
-      password: this.registerForm.value.password,
-    };
-    console.log(userDetails);
-    this.usersService.registerUser(userDetails).subscribe((status) => {
-      console.log(status);
-    });
+    if (this.registerForm.valid) {
+      let userDetails: UserDetails = {
+        userName: this.registerForm.value.userName,
+        firstName: this.registerForm.value.firstName,
+        lastName: this.registerForm.value.lastName,
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password,
+      };
+      console.log(userDetails);
+      this.usersService.registerUser(userDetails).subscribe((status) => {
+        console.log(status);
+      });
+    }
   }
 }
