@@ -4,6 +4,7 @@ import { of, Observable } from 'rxjs';
 
 const transactions: Transaction[] = [
   {
+    id: 1,
     amount: -52.32,
     type: 'Debit Card',
     status: 'Complete',
@@ -13,6 +14,7 @@ const transactions: Transaction[] = [
     merchantName: 'Netflix',
   },
   {
+    id: 2,
     amount: -783.32,
     type: 'Check',
     status: 'Processing',
@@ -22,6 +24,7 @@ const transactions: Transaction[] = [
     merchantName: 'Mcdonalds',
   },
   {
+    id: 3,
     amount: -900.19,
     type: 'Other',
     status: 'Complete',
@@ -41,6 +44,10 @@ export class TransactionsService {
 
   getTransactions(): Observable<Transaction[]> {
     return of(transactions);
+  }
+
+  getTransactionById(id: number): Observable<Transaction>{
+    return of(transactions.find(transaction => transaction.id == id)!)
   }
 
 

@@ -4,6 +4,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
+import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
 
 const routes: Routes = [
   {
@@ -15,9 +16,21 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'transactions',
-    component: TransactionsComponent
-  }
+    path: 'account/:id',
+    component: TransactionsComponent,
+<<<<<<< HEAD
+    children: [
+      {
+        path: 'transaction/:id',
+        component: TransactionDetailsComponent,
+      },
+    ],
+=======
+    /* children: [
+       {path: 'transaction/:id', component: TransactionDetailsComponent }
+    ], */
+>>>>>>> fb96f3420151cda007532a027194187e605b355d
+  },
 ];
 
 @NgModule({
