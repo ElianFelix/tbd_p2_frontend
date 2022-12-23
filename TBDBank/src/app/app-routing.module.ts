@@ -18,18 +18,12 @@ const routes: Routes = [
   {
     path: 'account/:id',
     component: TransactionsComponent,
-<<<<<<< HEAD
     children: [
       {
         path: 'transaction/:id',
         component: TransactionDetailsComponent,
       },
     ],
-=======
-    /* children: [
-       {path: 'transaction/:id', component: TransactionDetailsComponent }
-    ], */
->>>>>>> fb96f3420151cda007532a027194187e605b355d
   },
 ];
 
