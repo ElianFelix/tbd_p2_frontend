@@ -28,10 +28,7 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 import { HeaderComponent } from './components/header/header.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
-<<<<<<< HEAD
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
-=======
->>>>>>> fb96f3420151cda007532a027194187e605b355d
 
 @NgModule({
   declarations: [
@@ -45,10 +42,7 @@ import { TransactionDetailsComponent } from './components/transaction-details/tr
     HeaderComponent,
     TransactionsComponent,
     TransactionComponent,
-<<<<<<< HEAD
     TransactionDetailsComponent,
-=======
->>>>>>> fb96f3420151cda007532a027194187e605b355d
   ],
   imports: [
     BrowserModule,
