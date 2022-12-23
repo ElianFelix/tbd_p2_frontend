@@ -1,5 +1,5 @@
 import { Component, Input} from '@angular/core';
-import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal',
@@ -8,12 +8,12 @@ import { Location } from '@angular/common';
 })
 export class ModalComponent {
 
-  constructor(private location: Location){}
+  constructor(private router: Router, private route: ActivatedRoute){}
 
   @Input() title: string = '';
   
   return() {
-    this.location.back();
+    this.router.navigate(['./'], {relativeTo: this.route.parent});
   }
 
 }
