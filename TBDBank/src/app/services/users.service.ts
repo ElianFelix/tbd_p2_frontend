@@ -14,14 +14,18 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   getUser(userName: string) {
-    return this.http.get<string>(this.usersUrl + userName);
+    return this.http.get<UserDetails>(this.usersUrl + userName);
+  }
+
+  userExists(userName: string) {
+    return this.http.get<{ exists: boolean }>(this.usersUrl + userName);
   }
 
   registerUser(userForm: UserDetails): Observable<any> {
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(userForm);
     console.log(body);
-    return this.http.post<UserDetails>(this.usersUrl, userForm, {
+    return this.http.post<{ ok: boolean }>(this.usersUrl, userForm, {
       headers: headers,
     });
   }

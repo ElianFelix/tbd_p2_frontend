@@ -22,6 +22,8 @@ export class RegisterFormComponent {
     ]),
   });
 
+  userExists = true;
+
   constructor(private usersService: UsersService, private location: Location) {}
 
   onSubmit() {
@@ -34,14 +36,26 @@ export class RegisterFormComponent {
         email: String(this.registerForm.value.email),
         password: String(this.registerForm.value.password),
       };
-      if (this.usersService.getUser(userDetails.userName) !== null) {
+
+      // request to precheck if username is available
+      this.usersService
+        .userExists(userDetails.userName)
+        .subscribe((res) => (this.userExists = res.exists));
+      if (this.userExists) {
+        alert();
         return;
       }
+
+      // post request to create user with userDetails logs the response to console (might need to handle failure)
       console.log(userDetails);
-      this.usersService.registerUser(userDetails).subscribe((status) => {
-        console.log(status);
+      this.usersService.registerUser(userDetails).subscribe((res) => {
+        console.log(res);
       });
       this.location.back();
     }
+  }
+
+  alert() {
+    window.alert('username already in use');
   }
 }

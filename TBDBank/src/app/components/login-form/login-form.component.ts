@@ -5,7 +5,6 @@ import { UsersService } from 'src/app/services/users.service';
 import { UserLogin } from 'src/app/models/UserLogin';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { NgIfContext } from '@angular/common';
 
 @Component({
   selector: 'app-login-form',
@@ -36,7 +35,7 @@ export class LoginFormComponent {
       };
       console.log(userLogin);
       // placeholder call, still need to handle output and save into a more permanent storage
-      this.authService.login(userLogin).subscribe((authResponse) => {
+      this.authService.login(userLogin).subscribe((res) => {
         console.log('User is logged in');
         this.router.navigateByUrl('/');
       });
