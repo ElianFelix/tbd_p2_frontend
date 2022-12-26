@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { UserLogin } from 'src/app/models/UserLogin';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -18,16 +20,25 @@ export class LoginFormComponent {
     ]),
   });
 
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   onSubmit() {
     console.log(this.loginForm.value);
     if (this.loginForm.valid) {
       let userLogin: UserLogin = {
-        userName: this.loginForm.value.userName,
-        password: this.loginForm.value.password,
+        userName: String(this.loginForm.value.userName),
+        password: String(this.loginForm.value.password),
       };
       console.log(userLogin);
+      // placeholder call, still need to handle output and save into a more permanent storage
+      this.authService.login(userLogin).subscribe(() => {
+        console.log('User is logged in');
+        this.router.navigateByUrl('/');
+      });
     }
   }
 }
