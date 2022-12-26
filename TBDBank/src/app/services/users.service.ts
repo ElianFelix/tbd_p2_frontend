@@ -9,9 +9,13 @@ import { environment as env } from '../environment/environment';
   providedIn: 'root',
 })
 export class UsersService {
-  usersUrl = env.API_URL + 'tbd/users/'; // URL to web api users collection
+  usersUrl = env.API_URL + 'users/'; // URL to web api users collection
 
   constructor(private http: HttpClient) {}
+
+  getUser(userName: string) {
+    return this.http.get<string>(this.usersUrl + userName);
+  }
 
   registerUser(userForm: UserDetails): Observable<any> {
     const headers = { 'content-type': 'application/json' };
