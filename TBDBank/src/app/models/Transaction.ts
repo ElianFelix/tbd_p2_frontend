@@ -1,9 +1,12 @@
+import { TransactionStatus } from "./TransactionStatus";
+import { TransactionType } from "./TransactionType";
+
 export interface Transaction {
     id?: number;
-    account?: string;
+    account: string;
     amount: number;
-    type: string;
-    status: string;
+    type: TransactionType;
+    status: TransactionStatus;
     category: string;
     description: string;
     date: number;
