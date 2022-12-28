@@ -9,12 +9,10 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   constructor(private router: Router) {}
 
-  checkRoute() {
-    return this.router.url != '/';
-  }
-
   //TODO once login service added, change to logout if user exists
-  isLoggedin(){}
+  isLoggedIn(): boolean{
+    return false;
+  }
 
   toggleTheme() {
     if (document.body.getAttribute('data-theme')) {
