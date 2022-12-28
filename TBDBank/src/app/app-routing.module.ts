@@ -6,6 +6,7 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AccountListComponent } from './components/account-list/account-list.component';
 
 const routes: Routes = [
   {
@@ -16,10 +17,10 @@ const routes: Routes = [
       { path: 'register', component: RegisterFormComponent },
     ],
   },
-  // {
-  //   path: '/accounts',
-  //   component: AccountsComponent
-  // },
+  {
+    path: 'accounts',
+    component: AccountListComponent
+  },
   {
     path: 'account/:id',
     component: TransactionsComponent,

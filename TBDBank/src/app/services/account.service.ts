@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Account } from '../components/account-list/account';
+import { Account } from '../models/Account';
 import { environment } from '../environment/environment';
 
 @Injectable({
@@ -9,31 +9,20 @@ import { environment } from '../environment/environment';
 })
 export class AccountService {
 
-  url: string = environment.API_URL;
+  url: string = environment.API_URL+"accounts";
+  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})}
 
   constructor(private http: HttpClient) { }
 
-  createNewAccount(account: Account): boolean {
+  createNewAccount(account: Account): Observable<boolean> {
 
-    let body = {
-      balance: account.balance,
-      type: account.type,
-      userId: account.userId
-    }
-
-    // this.http.post<string>(`${this.url}/accounts/new`, JSON.stringify(body));
-
-    return true;
+    return this.http.post<boolean>(this.url, account, this.httpOptions);
 
   }
 
-  getAccountsByUserId(userId: number): Observable<Account[]> {
+  getAccounts(): Observable<Account[]> {
 
-    // return this.http.get<Account[]>(`${this.url}accounts/${userId}`);
-
-    // dummy data for testing
-    const accList = [new Account(1, 1, 1, 1), new Account(1, 1, 1, 1), new Account(1, 1, 1, 1), new Account(1, 1, 1, 1)];
-    return of(accList);
+     return this.http.get<Account[]>(this.url, this.httpOptions);
 
   }
 

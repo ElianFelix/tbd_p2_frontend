@@ -17,7 +17,7 @@ export class TransactionsComponent implements OnInit {
   transactions: Transaction[] = [];
   filter: string = '';
   length: number;
-  page: number = 1;
+  page: number = 0;
   pageSize: number = 10;
 
   constructor(
@@ -42,7 +42,7 @@ export class TransactionsComponent implements OnInit {
             .getTransactions(account.id!)
             .subscribe((transactions) => {
               this.transactions = transactions.content;
-              this.length = transactions.numberOfElements;
+              this.length = transactions.totalElements;
             });
         }
       });
@@ -76,25 +76,26 @@ export class TransactionsComponent implements OnInit {
       //make the method wait half a second and only get used once to prevent repeatedly querying database
       .pipe(debounceTime(500), take(1))
       .subscribe((transactions) => {
+        console.log(transactions);
         this.transactions = transactions.content;
-        this.length = transactions.numberOfElements;
+        this.length = transactions.totalElements;
       });
   }
 
   //temporary method until accountservice is online
   getAccountById(accountId: string): Observable<any> {
-    if (accountId == '5b4d0d40-8649-11ed-a1eb-0242ac120002') {
+    if (accountId == '4dfcf1fc-39c9-4c13-af60-aeda5775322c') {
       return of({
-        id: '5b4d0d40-8649-11ed-a1eb-0242ac120002',
-        name: 'My Checking Account',
-        balance: 20050.22,
+        id: '4dfcf1fc-39c9-4c13-af60-aeda5775322c',
+        name: 'My Account',
+        balance: 420.69,
         type: { id: 1, type: 'Checking' },
         user: {
           userName: 'bob',
           firstName: 'Bob',
           lastName: 'Loblaw',
-          email: 'Bob.Loblaw@lawblog.com',
-          password: 'bobloblawslawblog',
+          email: 'Bobloblaw@lawblog.com',
+          password: 'password123',
         },
       });
     } else {
