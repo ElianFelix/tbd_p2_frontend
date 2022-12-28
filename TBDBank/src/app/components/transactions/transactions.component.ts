@@ -22,7 +22,7 @@ export class TransactionsComponent implements OnInit {
 
   constructor(
     private tService: TransactionsService,
-    //private aService: AccountService,
+    private aService: AccountService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -31,15 +31,16 @@ export class TransactionsComponent implements OnInit {
     //get the id parameter from the path param
     this.route.paramMap.subscribe((paramMap) => {
       //use the account id to retrieve an account object
-      this.getAccountById(paramMap.get('id')!).subscribe((account) => {
-        if (!account) {
+      //this.aService.getAccountById(paramMap.get('id')!).subscribe((account) => {
+      this.aService.getAccounts().subscribe((account) => {
+        if (!account[0]) {
           this.router.navigate(['/not-found']);
         } else {
-          this.account = account;
+          this.account = account[0];
 
           //use the account object to find the transactions for that account
           this.tService
-            .getTransactions(account.id!)
+            .getTransactions(account[0].id!)
             .subscribe((transactions) => {
               this.transactions = transactions.content;
               this.length = transactions.totalElements;
@@ -80,26 +81,5 @@ export class TransactionsComponent implements OnInit {
         this.transactions = transactions.content;
         this.length = transactions.totalElements;
       });
-  }
-
-  //temporary method until accountservice is online
-  getAccountById(accountId: string): Observable<any> {
-    if (accountId == '4dfcf1fc-39c9-4c13-af60-aeda5775322c') {
-      return of({
-        id: '4dfcf1fc-39c9-4c13-af60-aeda5775322c',
-        name: 'My Account',
-        balance: 420.69,
-        type: { id: 1, type: 'Checking' },
-        user: {
-          userName: 'bob',
-          firstName: 'Bob',
-          lastName: 'Loblaw',
-          email: 'Bobloblaw@lawblog.com',
-          password: 'password123',
-        },
-      });
-    } else {
-      return of(null);
-    }
   }
 }
