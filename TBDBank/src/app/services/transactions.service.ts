@@ -6,8 +6,8 @@ const transactions: Transaction[] = [
   {
     id: 1,
     amount: -52.32,
-    type: 'Debit Card',
-    status: 'Complete',
+    type: {id: 1, type:'Debit'},
+    status: {id: 2, status:'Complete'},
     category: 'Entertainment',
     description: 'Netflix Bill',
     date: Date.now(),
@@ -16,8 +16,8 @@ const transactions: Transaction[] = [
   {
     id: 2,
     amount: -783.32,
-    type: 'Check',
-    status: 'Processing',
+    type: {id: 3, type:'Check'},
+    status: {id: 1, status:'Processing'},
     category: 'Food',
     description: 'Mcdonalds',
     date: Date.now(),
@@ -26,8 +26,8 @@ const transactions: Transaction[] = [
   {
     id: 3,
     amount: -900.19,
-    type: 'Other',
-    status: 'Complete',
+    type: {id: 5, type:'Other'},
+    status: {id: 2, status:'Complete'},
     category: 'Neccesities',
     description: 'Tier 3 Pokimane Sub',
     date: Date.now(),
@@ -42,7 +42,7 @@ export class TransactionsService {
 
   constructor() { }
 
-  getTransactions(): Observable<Transaction[]> {
+  getTransactions(accountId: string, filter: string = '', pageSize: number = 10, page: number = 1): Observable<Transaction[]> {
     return of(transactions);
   }
 
