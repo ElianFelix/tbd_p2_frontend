@@ -16,7 +16,7 @@ export class TransactionsComponent implements OnInit {
   account: Account;
   transactions: Transaction[] = [];
   filter: string = '';
-  length: number = 100;
+  length: number;
   page: number = 1;
   pageSize: number = 10;
 
@@ -41,8 +41,8 @@ export class TransactionsComponent implements OnInit {
           this.tService
             .getTransactions(account.id!)
             .subscribe((transactions) => {
-              this.transactions = transactions;
-              this.length = transactions.length;
+              this.transactions = transactions.content;
+              this.length = transactions.numberOfElements;
             });
         }
       });
@@ -76,7 +76,8 @@ export class TransactionsComponent implements OnInit {
       //make the method wait half a second and only get used once to prevent repeatedly querying database
       .pipe(debounceTime(500), take(1))
       .subscribe((transactions) => {
-        this.transactions = transactions;
+        this.transactions = transactions.content;
+        this.length = transactions.numberOfElements;
       });
   }
 
