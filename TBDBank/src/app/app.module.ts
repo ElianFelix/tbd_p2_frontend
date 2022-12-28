@@ -29,6 +29,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { TransactionDetailsComponent } from './components/transaction-details/tr
     TransactionsComponent,
     TransactionComponent,
     TransactionDetailsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

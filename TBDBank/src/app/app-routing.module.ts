@@ -5,6 +5,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
       { path: 'register', component: RegisterFormComponent },
     ],
   },
+  // {
+  //   path: '/accounts',
+  //   component: AccountsComponent
+  // },
   {
     path: 'account/:id',
     component: TransactionsComponent,
@@ -25,6 +30,11 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+  },
+  { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
 ];
 
 @NgModule({

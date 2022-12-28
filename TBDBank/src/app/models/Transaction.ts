@@ -1,9 +1,10 @@
+import { Account } from "./Account";
 import { TransactionStatus } from "./TransactionStatus";
 import { TransactionType } from "./TransactionType";
 
 export interface Transaction {
     id?: number;
-    account: string;
+    account?: Account;
     amount: number;
     type: TransactionType;
     status: TransactionStatus;
