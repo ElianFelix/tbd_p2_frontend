@@ -18,13 +18,12 @@ export class TransactionDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let transaction$ = this.route.paramMap.pipe(
-      switchMap((params) => {
-        return this.transactionService.getTransactionById(
-          Number(params.get('id'))
-        );
-      })
-    );
-    transaction$.subscribe((transaction) => (this.transaction = transaction));
+    this.route.paramMap.subscribe((params) => {
+      this.transactionService
+        .getTransactionById(Number(params.get('id')))
+        .subscribe((transaction) => {
+          this.transaction = transaction
+        });
+    });
   }
 }

@@ -77,7 +77,6 @@ export class TransactionsComponent implements OnInit {
       //make the method wait half a second and only get used once to prevent repeatedly querying database
       .pipe(debounceTime(500), take(1))
       .subscribe((transactions) => {
-        console.log(transactions);
         this.transactions = transactions.content;
         this.length = transactions.totalElements;
       });
