@@ -31,6 +31,7 @@ import { TransactionComponent } from './components/transaction/transaction.compo
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { CreateTransferComponent } from './components/create-transfer/create-tra
     TransactionDetailsComponent,
     NotFoundComponent,
     CreateTransferComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,7 @@ import { CreateTransferComponent } from './components/create-transfer/create-tra
     MatInputModule,
     MatDividerModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

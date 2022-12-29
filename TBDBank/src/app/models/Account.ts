@@ -1,5 +1,5 @@
-import { AccountType } from "./AccountType";
-import { UserDetails } from "./UserDetails";
+import { AccountType } from './AccountType';
+import { UserDetails } from './UserDetails';
 
 export interface Account {
     id?: string;
