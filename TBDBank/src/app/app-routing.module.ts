@@ -7,6 +7,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AccountListComponent } from './components/account-list/account-list.component';
+import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
         path: 'transaction/:id',
         component: TransactionDetailsComponent,
       },
+      {
+        path: 'create-transfer',
+        component: CreateTransferComponent
+      }
     ],
   },
   {

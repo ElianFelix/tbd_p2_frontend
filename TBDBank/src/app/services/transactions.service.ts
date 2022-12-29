@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Transaction } from '../models/Transaction';
 import { of, Observable } from 'rxjs';
 import { environment } from '../environment/environment';
@@ -37,9 +37,8 @@ import { environment } from '../environment/environment';
   providedIn: 'root',
 })
 export class TransactionsService {
-
-  url: string = environment.API_URL + "transactions";
-
+  url: string = environment.API_URL + 'transactions';
+  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})}
 
   constructor(private http: HttpClient) {}
 
@@ -52,13 +51,19 @@ export class TransactionsService {
     const params = {
       page: page,
       size: pageSize,
-      filter: filter
-    }
-    return this.http.get<any>(`${this.url}/${accountId}`, { params })
+      filter: filter,
+    };
+    return this.http.get<any>(`${this.url}/${accountId}`, { params });
     //return of(results);
   }
 
   getTransactionById(id: number): Observable<Transaction> {
     return this.http.get<any>(`${this.url}/transaction/${id}`);
   }
+
+
+  createTransaction(transaction: Transaction) {
+    return this.http.post<Transaction>(`${this.url}`, transaction, this.httpOptions);
+  }
+
 }

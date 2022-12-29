@@ -10,6 +10,6 @@ export interface Transaction {
     status: TransactionStatus;
     category: string;
     description: string;
-    date: number;
+    date?: number;
     merchantName: string;
 }
