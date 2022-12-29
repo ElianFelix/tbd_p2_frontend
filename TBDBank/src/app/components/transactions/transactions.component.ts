@@ -81,4 +81,7 @@ export class TransactionsComponent implements OnInit {
         this.length = transactions.totalElements;
       });
   }
+  onClick() {
+    this.router.navigate(['create-transfer'], {relativeTo: this.route});
+  }
 }

@@ -30,6 +30,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     TransactionComponent,
     TransactionDetailsComponent,
     NotFoundComponent,
+    CreateTransferComponent,
   ],
   imports: [
     BrowserModule,

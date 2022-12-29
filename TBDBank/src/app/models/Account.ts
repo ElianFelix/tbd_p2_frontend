@@ -3,9 +3,9 @@ import { UserDetails } from "./UserDetails";
 
 export interface Account {
     id?: string;
-    name: string;
-    user: UserDetails;
-    balance: number;
-    type: AccountType;
+    name?: string;
+    user?: UserDetails;
+    balance?: number;
+    type?: AccountType;
 
 }

@@ -28,7 +28,7 @@
     [transaction]="transaction"
   ></app-transaction>
     <div class="row my-2">
-      <div class="col"><app-button>Transfer Money</app-button></div>
+      <div class="col"><app-button (btnClick)="onClick()">Transfer Money</app-button></div>
       <div class="col">
         <mat-paginator
           [length]="length"
