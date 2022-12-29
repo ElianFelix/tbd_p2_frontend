@@ -1,5 +1,5 @@
 <ul>
     <li *ngFor="let account of accounts">       
-     <a [routerLink]="['/accounts/', account.id]">Account number #{{account.id | slice:-4}}: {{account.balance | currency}}</a>
+     <a [routerLink]="['/account/', account.id]">Account number #{{account.id | slice:-4}}: {{account.balance | currency}}</a>
     </li>
 </ul>
