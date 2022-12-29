@@ -30,6 +30,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     TransactionComponent,
     TransactionDetailsComponent,
     NotFoundComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatInputModule,
     MatDividerModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
