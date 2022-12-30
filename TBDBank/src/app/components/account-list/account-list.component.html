@@ -2,7 +2,7 @@
   <div class="row text-center">
     <h1 class="title">
       {{
-        accounts[0].user.firstName + " " + accounts[0].user.lastName
+        accounts[0].user!.firstName + " " + accounts[0].user!.lastName
           | uppercase
       }}'s Accounts
     </h1>

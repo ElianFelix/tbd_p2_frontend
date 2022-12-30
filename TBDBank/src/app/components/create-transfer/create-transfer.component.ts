@@ -4,6 +4,7 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
+  AbstractControl,
 } from '@angular/forms';
 import { Account } from 'src/app/models/Account';
 import { Transaction } from 'src/app/models/Transaction';
@@ -19,17 +20,24 @@ export class CreateTransferComponent implements OnInit {
   transferForm: FormGroup;
   accounts: Account[] = [];
 
-  validateAmount(control: FormControl) { 
-    const sender = this.accounts.find(account => account.id === control.parent?.value.sender);
+  validateAmount(control: FormControl) {
+    const sender = this.accounts.find(
+      (account) => account.id === control.parent?.value.sender
+    );
     const balance = sender ? sender.balance : 0;
-    if (control.value > balance!){
+    if (control.value > balance!) {
       return {
-        amountTooHigh: true
+        amountTooHigh: true,
       };
+    }
+
+    if (control.value < 0) {
+      return {
+        amountLessThanZero: true,
+      }
     }
     return null;
   }
-
 
   constructor(
     private accountService: AccountService,
@@ -38,7 +46,6 @@ export class CreateTransferComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.transferForm = this.formBuilder.group({
       sender: ['', Validators.required],
       recipient: ['', Validators.required],
@@ -50,60 +57,65 @@ export class CreateTransferComponent implements OnInit {
       .subscribe((accounts) => (this.accounts = accounts));
   }
 
-  get sender(){
+  get sender() {
     return this.transferForm.get('sender');
   }
 
-  get recipient(){
+  get recipient() {
     return this.transferForm.get('recipient');
   }
 
-  get amount(){
+  get amount() {
     return this.transferForm.get('amount');
   }
 
-  onSubmit(){
+  disableChosen(control: AbstractControl, accountId: string): boolean {
+    if(control == this.sender) {
+      return accountId == control.parent?.value.recipient;
+    }
+    return accountId == control.parent?.value.sender;
+  }
+
+  onSubmit() {
     console.log(this.transferForm.value);
-    const sender = this.accounts.find(account => account.id === this.sender?.value);
-    const recipient = this.accounts.find(account => account.id === this.recipient?.value);
+    const sender = this.accounts.find(
+      (account) => account.id === this.sender?.value
+    );
+    const recipient = this.accounts.find(
+      (account) => account.id === this.recipient?.value
+    );
     const amount = this.amount?.value;
-    if(sender && recipient && sender.id != recipient.id) {
-      if(sender.balance! > amount) {
+    if (sender && recipient && sender.id != recipient.id) {
+      if (sender.balance! > amount) {
         //change balance a
         //this.accountService.update({...sender, balance: sender.balance!-amount})
         console.log('senders updated account');
-        console.log({...sender, balance: sender.balance!-amount})
+        console.log({ ...sender, balance: sender.balance! - amount });
         //change balance v
         //this.accountService.update({...recipient, balance: recipient.balance! + amount})
         console.log("recipient's updated account");
-      console.log({...recipient, balance: recipient.balance! + amount})
+        console.log({ ...recipient, balance: recipient.balance! + amount });
         const transactionFrom: Transaction = {
-          account: {id: sender.id},
+          account: { id: sender.id },
           amount: -amount,
-          type: {id:5},
-          status: {id:2},
+          type: { id: 5 },
+          status: { id: 2 },
           category: 'Transfer',
           description: `Transfer to ${recipient.name}`,
-          merchantName: 'TBD Bank'
-        }
+          merchantName: 'TBD Bank',
+        };
         const transactionTo: Transaction = {
-          account: {id: recipient.id},
+          account: { id: recipient.id },
           amount: amount,
-          type: {id:5},
-          status: {id:2},
+          type: { id: 5 },
+          status: { id: 2 },
           category: 'Transfer',
           description: `Transfer from ${sender.name}`,
-          merchantName: 'TBD Bank'
-        }
-       // this.transactionService.createTransaction(transactionFrom);
-      //  this.transactionService.createTransaction(transactionTo);
-
+          merchantName: 'TBD Bank',
+        };
+        // this.transactionService.createTransaction(transactionFrom);
+        //  this.transactionService.createTransaction(transactionTo);
       }
-
     }
-
   }
-
-
-
 }
