@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { environment as env } from '../environment/environment';
   providedIn: 'root',
 })
 export class UsersService {
-  usersUrl = env.API_URL + 'users/'; // URL to web api users collection
+  usersUrl = env.API_URL + 'users'; // URL to web api users collection
 
   constructor(private http: HttpClient) {}
 
@@ -18,15 +18,17 @@ export class UsersService {
   }
 
   userExists(userName: string) {
-    return this.http.get<{ exists: boolean }>(this.usersUrl + userName);
+    return this.http.get<{ result: boolean }>(this.usersUrl + '/' + userName, {
+      headers: { 'content-type': 'application/json' },
+      params: new HttpParams({ fromString: 'validate=true' }),
+    });
   }
 
   registerUser(userForm: UserDetails): Observable<any> {
-    const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(userForm);
     console.log(body);
     return this.http.post<{ ok: boolean }>(this.usersUrl, userForm, {
-      headers: headers,
+      headers: { 'content-type': 'application/json' },
     });
   }
 }

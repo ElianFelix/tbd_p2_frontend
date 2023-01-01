@@ -15,12 +15,21 @@ export class AuthService {
   login(userLogin: UserLogin) {
     // this is just the HTTP call, still need to handle the reception of the token
     return this.http
-      .post<{ token: string }>(`${this.apiUrl}login`, userLogin)
-      .pipe(tap((res) => this.setJwtSession(res)));
+      .post<{ userName: string; accessToken: string }>(
+        `${this.apiUrl}auth/login`,
+        userLogin
+      )
+      .pipe(
+        tap((res) => {
+          console.log(res);
+          this.setJwtSession(res);
+        })
+      );
   }
 
-  private setJwtSession(authResponse: { token: string }) {
-    return localStorage.setItem('id_token', authResponse.token);
+  private setJwtSession(resBody: { userName: string; accessToken: string }) {
+    localStorage.setItem('id_token', resBody.accessToken);
+    localStorage.setItem('active_user', resBody.userName);
   }
 
   public isLoggedIn() {

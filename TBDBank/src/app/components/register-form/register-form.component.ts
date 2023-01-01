@@ -22,7 +22,7 @@ export class RegisterFormComponent {
     ]),
   });
 
-  userExists = true;
+  userExists = false;
 
   constructor(private usersService: UsersService, private location: Location) {}
 
@@ -38,13 +38,14 @@ export class RegisterFormComponent {
       };
 
       // request to precheck if username is available
-      this.usersService
-        .userExists(userDetails.userName)
-        .subscribe((res) => (this.userExists = res.exists));
-      if (this.userExists) {
-        alert();
-        return;
-      }
+      this.usersService.userExists(userDetails.userName).subscribe((res) => {
+        this.userExists = res.result;
+        if (this.userExists) {
+          alert('this user already exists');
+          return;
+        }
+        console.log(res);
+      });
 
       // post request to create user with userDetails logs the response to console (might need to handle failure)
       console.log(userDetails);
@@ -53,9 +54,5 @@ export class RegisterFormComponent {
       });
       this.location.back();
     }
-  }
-
-  alert() {
-    window.alert('username already in use');
   }
 }
