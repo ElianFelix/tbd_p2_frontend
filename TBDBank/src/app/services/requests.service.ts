@@ -9,15 +9,17 @@ import { Request } from '../models/Request';
 })
 export class RequestsService {
   url: string = environment.API_URL + 'requests';
+  requests: Request[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getRequest(id: number): Observable<Request> {
-    //const headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `${localStorage.getItem('jwt')}`})
 
-    return this.http.get<Request>(this.url + '/' + id, {
+  getRequest(id: number): Observable<Request> {
+    
+   return this.http.get<Request>(this.url + '/' + id, {
       headers: this.getHeaders(),
     });
+
   }
 
   createRequest(request: Request): Observable<number> {

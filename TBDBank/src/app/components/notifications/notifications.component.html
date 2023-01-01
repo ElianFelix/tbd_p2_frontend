@@ -15,10 +15,8 @@
     ></mat-icon>
   </button>
   <mat-menu #notees="matMenu">
-    <div *ngIf="notifications$ | async as notifications">
     <a mat-menu-item *ngIf="notifications.length <= 0">There's nothing here</a>
-  </div>
-    <div mat-menu-item *ngFor="let notification of notifications$ | async as notifications">
+    <div mat-menu-item *ngFor="let notification of notifications">
       <div class="container border my-1">
         <div class="row m-1 px-2">
           <div class="col">

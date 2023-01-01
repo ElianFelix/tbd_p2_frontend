@@ -18,6 +18,10 @@ export class HeaderComponent {
     return false;
   }
 
+  getUser(): string {
+    return localStorage.getItem('username') || '';
+  }
+
   toggleTheme() {
     if (document.body.getAttribute('data-theme')) {
       document.body.removeAttribute('data-theme');

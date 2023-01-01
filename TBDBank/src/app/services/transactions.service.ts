@@ -52,12 +52,14 @@ export class TransactionsService {
       size: pageSize,
       filter: filter,
     };
+    const headers = this.getHeaders()
 
     return this.http.get<any>(`${this.url}/${accountId}`, {
-      ...this.getHeaders(),
+      headers,
       params,
     });
     //return of(results);
+
   }
 
   getTransactionById(id: number): Observable<Transaction> {

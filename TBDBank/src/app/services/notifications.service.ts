@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../environment/environment';
 import { Notification } from '../models/Notification';
-import { RefreshService } from './refresh.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,16 +15,10 @@ export class NotificationsService {
     }),
   };
 
-  refreshSubject: Subject<void> = new Subject<void>();
+  private notifications: Notification[] = [];
+  notificationsUpdated = new EventEmitter<void>();
 
-  constructor(
-    private http: HttpClient,
-    private refreshService: RefreshService
-  ) {
-    this.refreshSubject.subscribe(() => {
-      this.refreshService.refreshSubject.next();
-    });
-  }
+  constructor(private http: HttpClient) {}
 
   countNotifications(): Observable<number> {
     return this.http.get<number>(this.url + '/count', {
@@ -33,14 +26,23 @@ export class NotificationsService {
     });
   }
 
-  getNotifications(): Observable<Notification[]> {
+  getNotifications(): Notification[] {
+    return this.notifications;
+  }
+
+  fetchNotifications(): void {
     this.options.headers.set(
       'Authorization',
       localStorage.getItem('jwt') || ''
     );
-    return this.http.get<Notification[]>(this.url, {
-      headers: this.getHeaders(),
-    });
+    this.http
+      .get<Notification[]>(this.url, {
+        headers: this.getHeaders(),
+      })
+      .subscribe((notifications) => {
+        this.notifications = notifications;
+        this.notificationsUpdated.emit();
+      });
   }
 
   createNotification(notification: Notification): Observable<boolean> {
@@ -79,9 +81,5 @@ export class NotificationsService {
       'Content-Type': 'application/json',
       Authorization: jwt,
     });
-  }
-
-  refresh() {
-    this.refreshSubject.next();
   }
 }
