@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 
 // Materials
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +13,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatIconModule} from '@angular/material/icon'; 
+import {MatMenuModule} from '@angular/material/menu'; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -32,6 +37,10 @@ import { TransactionDetailsComponent } from './components/transaction-details/tr
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
 import { AccountComponent } from './components/account/account.component';
+import { CreateRequestComponent } from './components/create-request/create-request.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { RequestsComponent } from './components/requests/requests.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +58,10 @@ import { AccountComponent } from './components/account/account.component';
     NotFoundComponent,
     CreateTransferComponent,
     AccountComponent,
+    CreateRequestComponent,
+    NotificationsComponent,
+    RequestsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +78,13 @@ import { AccountComponent } from './components/account/account.component';
     MatDividerModule,
     MatSelectModule,
     MatPaginatorModule,
+    MatBadgeModule,
+    MatIconModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent],

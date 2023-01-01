@@ -31,7 +31,7 @@ export class RegisterFormComponent {
     console.log(this.registerForm.value);
     if (this.registerForm.valid) {
       let userDetails: UserDetails = {
-        userName: this.registerForm.value.userName,
+        username: this.registerForm.value.userName,
         firstName: this.registerForm.value.firstName,
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email,

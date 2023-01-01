@@ -9,7 +9,7 @@ import { environment as env } from '../environment/environment';
   providedIn: 'root',
 })
 export class UsersService {
-  usersUrl = env.API_URL + 'tbd/users/'; // URL to web api users collection
+  usersUrl = env.API_URL + '/users'; // URL to web api users collection
 
   constructor(private http: HttpClient) {}
 

@@ -8,19 +8,32 @@ import { TransactionDetailsComponent } from './components/transaction-details/tr
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AccountListComponent } from './components/account-list/account-list.component';
 import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
+import { CreateRequestComponent } from './components/create-request/create-request.component';
+import { RequestsComponent } from './components/requests/requests.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
     children: [
-      { path: 'login', component: ModalComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterFormComponent },
     ],
   },
   {
     path: 'accounts',
-    component: AccountListComponent
+    component: AccountListComponent,
+    children: [
+      {
+        path: 'create-transfer',
+        component: CreateTransferComponent
+      },
+      {
+        path:'create-request',
+        component:CreateRequestComponent
+      }
+    ]
   },
   {
     path: 'account/:id',
@@ -30,11 +43,12 @@ const routes: Routes = [
         path: 'transaction/:id',
         component: TransactionDetailsComponent,
       },
-      {
-        path: 'create-transfer',
-        component: CreateTransferComponent
-      }
+
     ],
+  },
+  {
+    path: 'requests/:id',
+    component: RequestsComponent
   },
   {
     path: 'not-found',

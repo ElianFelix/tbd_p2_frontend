@@ -38,7 +38,6 @@ import { environment } from '../environment/environment';
 })
 export class TransactionsService {
   url: string = environment.API_URL + 'transactions';
-  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})}
 
   constructor(private http: HttpClient) {}
 
@@ -53,17 +52,31 @@ export class TransactionsService {
       size: pageSize,
       filter: filter,
     };
-    return this.http.get<any>(`${this.url}/${accountId}`, { params });
+
+    return this.http.get<any>(`${this.url}/${accountId}`, {
+      ...this.getHeaders(),
+      params,
+    });
     //return of(results);
   }
 
   getTransactionById(id: number): Observable<Transaction> {
-    return this.http.get<any>(`${this.url}/transaction/${id}`);
+    return this.http.get<any>(`${this.url}/transaction/${id}`, {
+      headers: this.getHeaders(),
+    });
   }
-
 
   createTransaction(transaction: Transaction) {
-    return this.http.post<Transaction>(`${this.url}`, transaction, this.httpOptions);
+    return this.http.post<Transaction>(`${this.url}`, transaction, {
+      headers: this.getHeaders(),
+    });
   }
 
+  getHeaders(): HttpHeaders {
+    const jwt = localStorage.getItem('jwt') || '';
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: jwt,
+    });
+  }
 }

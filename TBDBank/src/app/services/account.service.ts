@@ -1,29 +1,62 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable, of, Subject } from 'rxjs';
 import { Account } from '../models/Account';
 import { environment } from '../environment/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
+  private accounts: Account[] = [];
+  accountsUpdated = new EventEmitter<void>();
 
-  url: string = environment.API_URL+"accounts";
-  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})}
+  url: string = environment.API_URL + 'accounts';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   createNewAccount(account: Account): Observable<boolean> {
-
-    return this.http.post<boolean>(this.url, account, this.httpOptions);
-
+    return this.http.post<boolean>(this.url, account, {
+      headers: this.getHeaders(),
+    });
   }
 
-  getAccounts(): Observable<Account[]> {
-
-     return this.http.get<Account[]>(this.url, this.httpOptions);
-
+  fetchAccounts() {
+    return this.accounts;
   }
 
+  getAccounts(): void {
+    this.http
+      .get<Account[]>(this.url, {
+        headers: this.getHeaders(),
+      })
+      .subscribe((accounts) => {
+        this.accounts = accounts;
+        this.accountsUpdated.emit();
+      });
+  }
+
+  getAccountById(id: string): Observable<Account> {
+    return this.http.get<Account>(`${this.url}/${id}`, {
+      headers: this.getHeaders(),
+    });
+  }
+
+  update(account: Account): Observable<boolean> {
+    return this.http.put<boolean>(
+      `${this.url}/${account.id}/balance`,
+      account,
+      {
+        headers: this.getHeaders(),
+      }
+    );
+  }
+
+  getHeaders(): HttpHeaders {
+    const jwt = localStorage.getItem('jwt') || '';
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: jwt,
+    });
+  }
 }
