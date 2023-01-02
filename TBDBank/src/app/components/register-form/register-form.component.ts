@@ -27,7 +27,7 @@ export class RegisterFormComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       let userDetails: UserDetails = {
-        userName: String(this.registerForm.value.userName),
+        username: String(this.registerForm.value.userName),
         firstName: String(this.registerForm.value.firstName),
         lastName: String(this.registerForm.value.lastName),
         email: String(this.registerForm.value.email),

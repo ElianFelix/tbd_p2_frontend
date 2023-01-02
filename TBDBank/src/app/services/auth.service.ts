@@ -15,7 +15,7 @@ export class AuthService {
   login(userLogin: UserLogin) {
     // this is just the HTTP call, still need to handle the reception of the token
     return this.http
-      .post<{ userName: string; accessToken: string }>(
+      .post<{ username: string; accessToken: string }>(
         `${this.apiUrl}auth/login`,
         userLogin
       )
@@ -27,9 +27,9 @@ export class AuthService {
       );
   }
 
-  private setJwtSession(resBody: { userName: string; accessToken: string }) {
+  private setJwtSession(resBody: { username: string; accessToken: string }) {
     localStorage.setItem('id_token', resBody.accessToken);
-    localStorage.setItem('active_user', resBody.userName);
+    localStorage.setItem('active_user', resBody.username);
   }
 
   isLoggedIn() {
