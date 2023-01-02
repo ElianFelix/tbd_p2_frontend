@@ -1,31 +1,52 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from '../environment/environment';
+import { UserLogin } from '../models/UserLogin';
+import { environment as env } from '../environment/environment';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  url = environment.API_URL + 'auth/';
-
-  user: string;
+  apiUrl = env.API_URL;
 
   constructor(private http: HttpClient) {}
 
-  login(userName: string, password: string) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    this.http
-      .post<any>(
-        this.url + 'login',
-        { username: userName, password: password },
-        { headers }
+  login(userLogin: UserLogin) {
+    // this is just the HTTP call, still need to handle the reception of the token
+    return this.http
+      .post<{ userName: string; accessToken: string }>(
+        `${this.apiUrl}auth/login`,
+        userLogin
       )
-      .subscribe((res) => {
-        localStorage.setItem('jwt', 'Bearer ' + res.accessToken);
-        localStorage.setItem('username', res.username);
-      });
+      .pipe(
+        tap((res) => {
+          console.log(res);
+          this.setJwtSession(res);
+        })
+      );
   }
 
+  private setJwtSession(resBody: { userName: string; accessToken: string }) {
+    localStorage.setItem('id_token', resBody.accessToken);
+    localStorage.setItem('active_user', resBody.userName);
+  }
+
+  isLoggedIn() {
+    if (localStorage.getItem('id_token')) {
+      return true;
+    }
+    return false;
+  }
+
+  getLoggedInUser() {
+    return localStorage.getItem('active_user');
+  }
+
+  // delete local jwt practically ending session
+  logout() {
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('active_user');
+    return !this.isLoggedIn();
+  }
 }

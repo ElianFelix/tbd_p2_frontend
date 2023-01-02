@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,14 +9,19 @@ import { Location } from '@angular/common';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  //TODO once login service added, change to logout if user exists
-  isLoggedIn(): boolean {
-    if(localStorage.getItem('jwt')){
-      return true;
-    }
-    return false;
+  //change to logout if user exists
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  getLoggedInUser() {
+    return this.authService.getLoggedInUser();
   }
 
   getUser(): string {
@@ -28,12 +34,6 @@ export class HeaderComponent {
     } else {
       document.body.setAttribute('data-theme', 'dark');
     }
-  }
-
-  logout() {
-    localStorage.clear();
-  
-    this.router.navigate(['/']);
   }
   
 }

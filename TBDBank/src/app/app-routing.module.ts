@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
@@ -10,14 +10,14 @@ import { AccountListComponent } from './components/account-list/account-list.com
 import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
 import { CreateRequestComponent } from './components/create-request/create-request.component';
 import { RequestsComponent } from './components/requests/requests.component';
-import { LoginComponent } from './components/login/login.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
     children: [
-      { path: 'login', component: LoginComponent },
+      { path: 'login', component: LoginFormComponent },
       { path: 'register', component: RegisterFormComponent },
     ],
   },
@@ -36,6 +36,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'profile',
+    component: UserProfileComponent,
+  },
+  {
     path: 'account/:id',
     component: TransactionsComponent,
     children: [
@@ -43,7 +47,6 @@ const routes: Routes = [
         path: 'transaction/:id',
         component: TransactionDetailsComponent,
       },
-
     ],
   },
   {
