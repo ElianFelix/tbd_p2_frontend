@@ -32,16 +32,21 @@ export class AuthService {
     localStorage.setItem('active_user', resBody.userName);
   }
 
-  public isLoggedIn() {
+  isLoggedIn() {
     if (localStorage.getItem('id_token')) {
       return true;
     }
     return false;
   }
 
+  getLoggedInUser() {
+    return localStorage.getItem('active_user');
+  }
+
   // delete local jwt practically ending session
   logout() {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('active_user');
     return !this.isLoggedIn();
   }
 }

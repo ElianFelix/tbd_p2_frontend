@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   //TODO once login service added, change to logout if user exists
   isLoggedIn(): boolean{
     return false;
+  }
+
+  //TODO once login service added, change to logout if user exists
+  isLoggedin() {
+    return this.authService.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   toggleTheme() {
