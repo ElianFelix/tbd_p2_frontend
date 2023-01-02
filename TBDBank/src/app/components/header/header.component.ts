@@ -19,6 +19,10 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
+  getLoggedInUser() {
+    return this.authService.getLoggedInUser();
+  }
+
   toggleTheme() {
     if (document.body.getAttribute('data-theme')) {
       document.body.removeAttribute('data-theme');
