@@ -5,6 +5,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { UserLogin } from 'src/app/models/UserLogin';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-form',
@@ -23,7 +24,8 @@ export class LoginFormComponent {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private _snackbar: MatSnackBar
   ) {}
 
   onSubmit() {
@@ -52,7 +54,8 @@ export class LoginFormComponent {
       console.log('User is logged in');
       this.router.navigateByUrl('/');
     } else {
-      alert('Wrong username or password');
+      //alert('Wrong username or password');
+      this._snackbar.open('Wrong username or password', 'close', {duration: 5000});
     }
   }
 }

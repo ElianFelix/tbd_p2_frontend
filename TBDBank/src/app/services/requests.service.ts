@@ -13,13 +13,10 @@ export class RequestsService {
 
   constructor(private http: HttpClient) {}
 
-
   getRequest(id: number): Observable<Request> {
-    
-   return this.http.get<Request>(this.url + '/' + id, {
+    return this.http.get<Request>(this.url + '/' + id, {
       headers: this.getHeaders(),
     });
-
   }
 
   createRequest(request: Request): Observable<number> {
@@ -41,10 +38,8 @@ export class RequestsService {
   }
 
   getHeaders(): HttpHeaders {
-    const jwt = localStorage.getItem('jwt') || '';
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: jwt,
     });
   }
 }

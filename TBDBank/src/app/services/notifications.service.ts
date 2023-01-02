@@ -46,40 +46,26 @@ export class NotificationsService {
   }
 
   createNotification(notification: Notification): Observable<boolean> {
-    this.options.headers.set(
-      'Authorization',
-      localStorage.getItem('jwt') || ''
-    );
     return this.http.post<boolean>(this.url, notification, {
       headers: this.getHeaders(),
     });
   }
 
   markRead(id: number): Observable<boolean> {
-    this.options.headers.set(
-      'Authorization',
-      localStorage.getItem('jwt') || ''
-    );
     return this.http.put<boolean>(this.url + '/' + id, null, {
       headers: this.getHeaders(),
     });
   }
 
   deleteNotification(id: number) {
-    this.options.headers.set(
-      'Authorization',
-      localStorage.getItem('jwt') || ''
-    );
     return this.http.delete(this.url + '/' + id, {
       headers: this.getHeaders(),
     });
   }
 
   getHeaders(): HttpHeaders {
-    const jwt = localStorage.getItem('jwt') || '';
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: jwt,
     });
   }
 }

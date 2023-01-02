@@ -7,6 +7,7 @@ import { Account } from 'src/app/models/Account';
 import { Request } from 'src/app/models/Request';
 import { Transaction } from 'src/app/models/Transaction';
 import { AccountService } from 'src/app/services/account.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { RequestsService } from 'src/app/services/requests.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
@@ -27,6 +28,7 @@ export class RequestsComponent implements OnInit {
     private aServe: AccountService,
     private tServe: TransactionsService,
     private nServe: NotificationsService,
+    private authServe: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private _snackbar: MatSnackBar,
@@ -38,7 +40,7 @@ export class RequestsComponent implements OnInit {
       const id = params.get('id');
       if (id) {
         this.rServe.getRequest(Number(id)).subscribe((request) => {
-          if (localStorage.getItem('username') == request.recipient?.userName) {
+          if ( this.authServe.getLoggedInUser() == request.recipient?.username) {
             this.request = request;
           } else {
             this.router.navigate(['/']);
@@ -103,7 +105,7 @@ export class RequestsComponent implements OnInit {
       type: { id: 5 },
       status: { id: 2 },
       category: 'Transfer',
-      description: `Transfer from ${account!.user!.userName!}`,
+      description: `Transfer from ${account!.user!.username!}`,
       merchantName: 'TBD Bank',
     };
 
@@ -114,7 +116,7 @@ export class RequestsComponent implements OnInit {
       type: { id: 5 },
       status: { id: 2 },
       category: 'Transfer',
-      description: `Transfer to ${fromAccount!.user!.userName}`,
+      description: `Transfer to ${fromAccount!.user!.username}`,
       merchantName: 'TBD Bank',
     };
     console.log(transactionTo);
@@ -132,7 +134,7 @@ export class RequestsComponent implements OnInit {
         console.log(res);
         this.aServe.getAccounts();
         this.nServe.fetchNotifications();
-        this._snackbar.open('Success!', 'close');
+        this._snackbar.open('Success!', 'close', {duration: 5000});
         this.router.navigate(['/accounts']);
       });
   }

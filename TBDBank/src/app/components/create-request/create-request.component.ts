@@ -115,7 +115,7 @@ export class CreateRequestComponent implements OnInit {
           .createNotification(notification)
           .subscribe((bool) => {
             if (bool) {
-              this._snackbar.open('Success!', 'close');
+              this._snackbar.open('Success!', 'close', {duration: 5000});
               this.router.navigate(['/accounts'])
             } else {
               this.errors.push('error creating notification!');

@@ -53,10 +53,8 @@ export class AccountService {
   }
 
   getHeaders(): HttpHeaders {
-    const jwt = localStorage.getItem('jwt') || '';
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: jwt,
     });
   }
 }

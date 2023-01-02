@@ -52,14 +52,13 @@ export class TransactionsService {
       size: pageSize,
       filter: filter,
     };
-    const headers = this.getHeaders()
+    const headers = this.getHeaders();
 
     return this.http.get<any>(`${this.url}/${accountId}`, {
       headers,
       params,
     });
     //return of(results);
-
   }
 
   getTransactionById(id: number): Observable<Transaction> {
@@ -75,10 +74,8 @@ export class TransactionsService {
   }
 
   getHeaders(): HttpHeaders {
-    const jwt = localStorage.getItem('jwt') || '';
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: jwt,
     });
   }
 }
