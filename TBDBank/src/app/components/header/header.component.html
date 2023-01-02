@@ -151,10 +151,8 @@
               >Sign Up</a
             >
           </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)="logout()" *ngIf="isLoggedIn()"
-              >Logout</a
-            >
+          <li class="nav-item" *ngIf="isLoggedIn()">
+            <a class="nav-link theme-toggler" (click)="logout()">Logout</a>
           </li>
         </ul>
       </div>
