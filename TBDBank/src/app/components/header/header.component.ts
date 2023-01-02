@@ -10,13 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
-  //TODO once login service added, change to logout if user exists
-  isLoggedIn(): boolean{
-    return false;
-  }
-
-  //TODO once login service added, change to logout if user exists
-  isLoggedin() {
+  //change to logout if user exists
+  isLoggedIn() {
     return this.authService.isLoggedIn();
   }
 

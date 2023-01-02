@@ -152,7 +152,9 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" *ngIf="isLoggedIn()">Logout</a>
+            <a class="nav-link" (click)="logout()" *ngIf="isLoggedIn()"
+              >Logout</a
+            >
           </li>
         </ul>
       </div>
