@@ -33,9 +33,11 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
 import { AccountComponent } from './components/account/account.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 //Global services
 import { AuthInterceptorInterceptor } from './services/auth-interceptor.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { AuthInterceptorInterceptor } from './services/auth-interceptor.intercep
     NotFoundComponent,
     CreateTransferComponent,
     AccountComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

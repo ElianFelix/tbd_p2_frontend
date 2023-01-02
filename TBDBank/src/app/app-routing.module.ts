@@ -8,6 +8,7 @@ import { TransactionDetailsComponent } from './components/transaction-details/tr
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AccountListComponent } from './components/account-list/account-list.component';
 import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,11 @@ const routes: Routes = [
   },
   {
     path: 'accounts',
-    component: AccountListComponent
+    component: AccountListComponent,
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
   },
   {
     path: 'account/:id',
@@ -32,8 +37,8 @@ const routes: Routes = [
       },
       {
         path: 'create-transfer',
-        component: CreateTransferComponent
-      }
+        component: CreateTransferComponent,
+      },
     ],
   },
   {
