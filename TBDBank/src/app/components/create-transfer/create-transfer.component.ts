@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormControl,
   FormBuilder,
@@ -6,6 +6,8 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { forkJoin, switchMap } from 'rxjs';
 import { Account } from 'src/app/models/Account';
 import { Transaction } from 'src/app/models/Transaction';
 import { AccountService } from 'src/app/services/account.service';
@@ -34,7 +36,7 @@ export class CreateTransferComponent implements OnInit {
     if (control.value < 0) {
       return {
         amountLessThanZero: true,
-      }
+      };
     }
     return null;
   }
@@ -42,6 +44,7 @@ export class CreateTransferComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private transactionService: TransactionsService,
+    private router: Router,
     private formBuilder: FormBuilder
   ) {}
 
@@ -52,9 +55,8 @@ export class CreateTransferComponent implements OnInit {
       amount: ['', [Validators.required, this.validateAmount.bind(this)]],
     });
 
-    this.accountService
-      .getAccounts()
-      .subscribe((accounts) => (this.accounts = accounts));
+    this.accountService.getAccounts();
+    this.accounts = this.accountService.fetchAccounts();
   }
 
   get sender() {
@@ -70,14 +72,13 @@ export class CreateTransferComponent implements OnInit {
   }
 
   disableChosen(control: AbstractControl, accountId: string): boolean {
-    if(control == this.sender) {
+    if (control == this.sender) {
       return accountId == control.parent?.value.recipient;
     }
     return accountId == control.parent?.value.sender;
   }
 
   onSubmit() {
-    console.log(this.transferForm.value);
     const sender = this.accounts.find(
       (account) => account.id === this.sender?.value
     );
@@ -87,14 +88,6 @@ export class CreateTransferComponent implements OnInit {
     const amount = this.amount?.value;
     if (sender && recipient && sender.id != recipient.id) {
       if (sender.balance! > amount) {
-        //change balance a
-        //this.accountService.update({...sender, balance: sender.balance!-amount})
-        console.log('senders updated account');
-        console.log({ ...sender, balance: sender.balance! - amount });
-        //change balance v
-        //this.accountService.update({...recipient, balance: recipient.balance! + amount})
-        console.log("recipient's updated account");
-        console.log({ ...recipient, balance: recipient.balance! + amount });
         const transactionFrom: Transaction = {
           account: { id: sender.id },
           amount: -amount,
@@ -113,8 +106,31 @@ export class CreateTransferComponent implements OnInit {
           description: `Transfer from ${sender.name}`,
           merchantName: 'TBD Bank',
         };
-        // this.transactionService.createTransaction(transactionFrom);
-        //  this.transactionService.createTransaction(transactionTo);
+
+        const from$ = this.accountService.update({
+          ...sender,
+          balance: sender.balance! - amount,
+        });
+        const to$ = this.accountService.update({
+          ...recipient,
+          balance: recipient.balance! + amount,
+        });
+
+        forkJoin([from$, to$])
+          .pipe(
+            switchMap(([from, to]) => {
+              const transactionFrom$ =
+                this.transactionService.createTransaction(transactionFrom);
+              const transactionTo$ =
+                this.transactionService.createTransaction(transactionTo);
+              return forkJoin([transactionFrom$, transactionTo$]);
+            })
+          )
+          .subscribe((res) => {
+            console.log(res);
+            this.accountService.getAccounts();
+            this.router.navigate(['/accounts']);
+          });
       }
     }
   }

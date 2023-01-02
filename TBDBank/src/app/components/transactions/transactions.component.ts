@@ -31,16 +31,15 @@ export class TransactionsComponent implements OnInit {
     //get the id parameter from the path param
     this.route.paramMap.subscribe((paramMap) => {
       //use the account id to retrieve an account object
-      //this.aService.getAccountById(paramMap.get('id')!).subscribe((account) => {
-      this.aService.getAccounts().subscribe((account) => {
-        if (!account[0]) {
+      this.aService.getAccountById(paramMap.get('id')!).subscribe((account) => {
+        if (!account) {
           this.router.navigate(['/not-found']);
         } else {
-          this.account = account[0];
+          this.account = account;
 
           //use the account object to find the transactions for that account
           this.tService
-            .getTransactions(account[0].id!)
+            .getTransactions(account.id!)
             .subscribe((transactions) => {
               this.transactions = transactions.content;
               this.length = transactions.totalElements;

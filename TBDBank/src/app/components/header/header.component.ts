@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -24,6 +25,10 @@ export class HeaderComponent {
     return this.authService.getLoggedInUser();
   }
 
+  getUser(): string {
+    return localStorage.getItem('username') || '';
+  }
+
   toggleTheme() {
     if (document.body.getAttribute('data-theme')) {
       document.body.removeAttribute('data-theme');
@@ -31,4 +36,5 @@ export class HeaderComponent {
       document.body.setAttribute('data-theme', 'dark');
     }
   }
+  
 }

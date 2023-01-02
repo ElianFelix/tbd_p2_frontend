@@ -3,7 +3,7 @@
     <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
       <div class="container">
         <div class="row">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Sender</mat-label>
             <mat-select formControlName="sender">
               <mat-option>Select an Account</mat-option>
@@ -15,10 +15,10 @@
                 {{ account.balance | currency }}</mat-option
               >
             </mat-select>
-          </mat-form-field>
+          </mat-form-field >
         </div>
         <div class="row my-2">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Recipient</mat-label>
             <mat-select formControlName="recipient">
               <mat-option>Select an Account</mat-option>
@@ -33,7 +33,7 @@
           </mat-form-field>
         </div>
         <div class="row my-2">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Amount</mat-label>
             <input
               matInput

@@ -1,4 +1,10 @@
-<app-modal *ngIf="!transaction" [title]="'Loading..'">Please wait.</app-modal>
+<app-modal *ngIf="!transaction" [title]="'Loading..'">
+  <div
+    class="container d-flex justify-content-center py-3 my-3 border-top"
+  >
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+</app-modal>
 <app-modal *ngIf="transaction" [title]="transaction.description">
     <mat-divider></mat-divider>
     <p class="mx-3 my-2 fs-4 border-bottom d-flex justify-content-between">
