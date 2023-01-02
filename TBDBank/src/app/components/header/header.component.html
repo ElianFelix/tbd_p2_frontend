@@ -52,9 +52,13 @@
         </a>
       </div>
       <div class="col-6 mx-auto">
-        <ul class="navbar-nav" *ngIf="checkRoute()">
+        <ul class="navbar-nav" *ngIf="isLoggedIn()">
           <li class="nav-item">
-            <a routerLink="/" class="nav-link" routerLinkActive="active"
+            <a
+              routerLink="/"
+              class="nav-link"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
               >Home</a
             >
           </li>
@@ -136,16 +140,19 @@
         </svg>
 
         <ul class="navbar-nav justify-content-center">
-          <li class="nav-item">
+          <li *ngIf="!isLoggedIn()" class="nav-item">
             <a routerLink="login" routerLinkActive="active" class="nav-link"
               >Login</a
             >
           </li>
-          <mat-divider vertical="true"></mat-divider>
-          <li class="nav-item">
+          <mat-divider *ngIf="!isLoggedIn()" vertical="true"></mat-divider>
+          <li *ngIf="!isLoggedIn()" class="nav-item">
             <a routerLink="register" routerLinkActive="active" class="nav-link"
               >Sign Up</a
             >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="isLoggedIn()">Logout</a>
           </li>
         </ul>
       </div>

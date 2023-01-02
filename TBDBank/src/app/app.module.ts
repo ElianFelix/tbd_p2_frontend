@@ -30,6 +30,9 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
+import { AccountComponent } from './components/account/account.component';
 
 //Global services
 import { AuthInterceptorInterceptor } from './services/auth-interceptor.interceptor';
@@ -48,6 +51,9 @@ import { AuthInterceptorInterceptor } from './services/auth-interceptor.intercep
     TransactionComponent,
     TransactionDetailsComponent,
     LoginFormComponent,
+    NotFoundComponent,
+    CreateTransferComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

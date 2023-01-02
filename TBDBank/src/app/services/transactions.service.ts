@@ -1,54 +1,69 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Transaction } from '../models/Transaction';
 import { of, Observable } from 'rxjs';
+import { environment } from '../environment/environment';
 
-const transactions: Transaction[] = [
-  {
-    id: 1,
-    amount: -52.32,
-    type: 'Debit Card',
-    status: 'Complete',
-    category: 'Entertainment',
-    description: 'Netflix Bill',
-    date: Date.now(),
-    merchantName: 'Netflix',
+/*pageable object format
+  content: [transactions],
+  pageable: {
+    sort: {
+      empty: true,
+      sorted: false,
+      unsorted: true,
+    },
+    offset: 0,
+    pageNumber: 0,
+    pageSize: 2,
+    paged: true,
+    unpaged: false,
   },
-  {
-    id: 2,
-    amount: -783.32,
-    type: 'Check',
-    status: 'Processing',
-    category: 'Food',
-    description: 'Mcdonalds',
-    date: Date.now(),
-    merchantName: 'Mcdonalds',
+  last: false,
+  totalPages: 50,
+  totalElements: 100,
+  first: true,
+  size: 2,
+  number: 0,
+  sort: {
+    empty: true,
+    sorted: false,
+    unsorted: true,
   },
-  {
-    id: 3,
-    amount: -900.19,
-    type: 'Other',
-    status: 'Complete',
-    category: 'Neccesities',
-    description: 'Tier 3 Pokimane Sub',
-    date: Date.now(),
-    merchantName: 'Twitch',
-  },
-]
+  numberOfElements: 200,
+  empty: false,
+*/
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TransactionsService {
+  url: string = environment.API_URL + 'transactions';
+  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})}
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  getTransactions(): Observable<Transaction[]> {
-    return of(transactions);
+  getTransactions(
+    accountId: string,
+    filter: string = '',
+    pageSize: number = 10,
+    page: number = 0
+  ): Observable<any> {
+    const params = {
+      page: page,
+      size: pageSize,
+      filter: filter,
+    };
+    return this.http.get<any>(`${this.url}/${accountId}`, { params });
+    //return of(results);
   }
 
-  getTransactionById(id: number): Observable<Transaction>{
-    return of(transactions.find(transaction => transaction.id == id)!)
+  getTransactionById(id: number): Observable<Transaction> {
+    return this.http.get<any>(`${this.url}/transaction/${id}`);
   }
 
+
+  createTransaction(transaction: Transaction) {
+    return this.http.post<Transaction>(`${this.url}`, transaction, this.httpOptions);
+  }
 
 }

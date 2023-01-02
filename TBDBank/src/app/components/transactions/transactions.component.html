@@ -1,7 +1,7 @@
 <router-outlet></router-outlet>
-<div class="container">
+<div *ngIf="account" class="container">
   <div class="row text-center">
-    <h1 class="title">Acc Name #### - Details</h1>
+    <h1 class="title">{{account.name}} #{{account.id | slice: -4 }} - Details</h1>
   </div>
   <div class="container">
     <div class="row align-items-stretch">
@@ -10,8 +10,8 @@
           <mat-label>Filter</mat-label>
           <mat-select [(value)]="filter" (selectionChange)="onFilter()">
             <mat-option>None</mat-option>
-            <mat-option value="income">Income</mat-option>
-            <mat-option value="expenses">Expenses</mat-option>
+            <mat-option value="Income">Income</mat-option>
+            <mat-option value="Expenses">Expenses</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -28,12 +28,12 @@
     [transaction]="transaction"
   ></app-transaction>
     <div class="row my-2">
-      <div class="col"><app-button>Transfer Money</app-button></div>
+      <div class="col"><app-button (btnClick)="onClick()">Transfer Money</app-button></div>
       <div class="col">
         <mat-paginator
           [length]="length"
           [pageSize]="pageSize"
-          [pageSizeOptions]="[5, 10, 25, 100]"
+          [pageSizeOptions]="[5, 10, 25]"
           aria-label="Select page"
           (page)="handlePageEvent($event)"
         ></mat-paginator>

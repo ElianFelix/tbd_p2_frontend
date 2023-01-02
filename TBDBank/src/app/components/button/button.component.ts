@@ -9,6 +9,8 @@ export class ButtonComponent {
 
   @Output() btnClick = new EventEmitter();
 
+  @Input() disabled = false;
+ 
   onClick(){
     this.btnClick.emit();
   }
