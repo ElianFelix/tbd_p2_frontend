@@ -27,7 +27,6 @@ export class LoginFormComponent {
   ) {}
 
   onSubmit() {
-    console.log(this.loginForm.value);
     if (this.loginForm.valid) {
       let userLogin: UserLogin = {
         userName: String(this.loginForm.value.userName),
@@ -35,10 +34,25 @@ export class LoginFormComponent {
       };
       console.log(userLogin);
       // placeholder call, still need to handle output and save into a more permanent storage
-      this.authService.login(userLogin).subscribe((res) => {
-        console.log('User is logged in');
-        this.router.navigateByUrl('/');
-      });
+      this.authService.login(userLogin).subscribe(
+        (res) => {
+          console.log(res);
+          this.resultCheck(true);
+        },
+        (err) => {
+          console.log(err);
+          this.resultCheck(false);
+        }
+      );
+    }
+  }
+
+  resultCheck(result: boolean) {
+    if (result) {
+      console.log('User is logged in');
+      this.router.navigateByUrl('/');
+    } else {
+      alert('Wrong username or password');
     }
   }
 }

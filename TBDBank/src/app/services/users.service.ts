@@ -27,7 +27,7 @@ export class UsersService {
   registerUser(userForm: UserDetails): Observable<any> {
     const body = JSON.stringify(userForm);
     console.log(body);
-    return this.http.post<{ ok: boolean }>(this.usersUrl, userForm, {
+    return this.http.post<{ result: boolean }>(this.usersUrl, userForm, {
       headers: { 'content-type': 'application/json' },
     });
   }

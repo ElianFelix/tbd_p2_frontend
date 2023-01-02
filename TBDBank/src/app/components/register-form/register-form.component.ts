@@ -22,12 +22,9 @@ export class RegisterFormComponent {
     ]),
   });
 
-  userExists = false;
-
   constructor(private usersService: UsersService, private location: Location) {}
 
   onSubmit() {
-    console.log(this.registerForm.value);
     if (this.registerForm.valid) {
       let userDetails: UserDetails = {
         userName: String(this.registerForm.value.userName),
@@ -37,22 +34,26 @@ export class RegisterFormComponent {
         password: String(this.registerForm.value.password),
       };
 
-      // request to precheck if username is available
-      this.usersService.userExists(userDetails.userName).subscribe((res) => {
-        this.userExists = res.result;
-        if (this.userExists) {
-          alert('this user already exists');
-          return;
-        }
-        console.log(res);
-      });
-
       // post request to create user with userDetails logs the response to console (might need to handle failure)
       console.log(userDetails);
-      this.usersService.registerUser(userDetails).subscribe((res) => {
-        console.log(res);
-      });
+      this.usersService.registerUser(userDetails).subscribe(
+        (res) => {
+          console.log(res);
+          this.resultCheck(res.result);
+        },
+        (err) => {
+          console.log(err);
+          this.resultCheck(err.result);
+        }
+      );
+    }
+  }
+
+  resultCheck(result: boolean) {
+    if (result) {
       this.location.back();
+    } else {
+      alert('This username already exists');
     }
   }
 }
