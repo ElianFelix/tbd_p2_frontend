@@ -23,10 +23,12 @@
         <app-button routerLink="create-account">Create Account</app-button>
       </div>
       <div class="col-2">
-        <app-button routerLink="create-transfer">Transfer Money</app-button>
+        <app-button routerLink="create-transfer" *ngIf="accounts.length"
+          >Transfer Money</app-button
+        >
       </div>
       <div class="col-2">
-        <app-button routerLink="create-request"
+        <app-button routerLink="create-request" *ngIf="accounts.length"
           >Request or Send Money</app-button
         >
       </div>

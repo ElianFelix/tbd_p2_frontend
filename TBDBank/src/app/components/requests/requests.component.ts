@@ -44,7 +44,7 @@ export class RequestsComponent implements OnInit {
             this.request = request;
           } else {
             this.router.navigate(['/']);
-            this._snackbar.open("That's not yours!", 'close');
+            this._snackbar.open("That's not yours!", 'close', {duration: 5000});
           }
         });
       }
