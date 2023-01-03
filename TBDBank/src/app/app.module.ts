@@ -45,6 +45,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 
 //Global services
 import { AuthInterceptorInterceptor } from './services/auth-interceptor.interceptor';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { AuthInterceptorInterceptor } from './services/auth-interceptor.intercep
     NotificationsComponent,
     RequestsComponent,
     UserProfileComponent,
+    CreateAccountComponent,
   ],
   imports: [
     BrowserModule,
