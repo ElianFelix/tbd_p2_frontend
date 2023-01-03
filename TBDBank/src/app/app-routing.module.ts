@@ -11,6 +11,7 @@ import { CreateTransferComponent } from './components/create-transfer/create-tra
 import { CreateRequestComponent } from './components/create-request/create-request.component';
 import { RequestsComponent } from './components/requests/requests.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path:'create-request',
         component:CreateRequestComponent
+      },
+      {
+        path: 'create-account',
+        component: CreateAccountComponent
       }
     ]
   },
