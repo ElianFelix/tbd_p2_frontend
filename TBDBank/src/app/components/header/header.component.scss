@@ -1,35 +1,38 @@
 .logo * {
-    fill: var(--tbd-main);
-  }
+  fill: var(--tbd-main);
+}
 
 .theme-toggler {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .theme-toggler circle {
-    fill:var(--tbd-background);
-    stroke: var(--tbd-main);
+  fill: var(--tbd-background);
+  stroke: var(--tbd-main);
 }
 
 .squiggle {
-    stroke: var(--tbd-main);
+  stroke: var(--tbd-main);
 }
 
 .sun {
-    fill:var(--tbd-background);
-    stroke: var(--tbd-main);
+  fill: var(--tbd-background);
+  stroke: var(--tbd-main);
 }
 
 .moon-outline {
-    fill:var(--tbd-background);
+  fill: var(--tbd-background);
 }
 
 .moon-fill {
-    fill: var(--tbd-main);
+  fill: var(--tbd-main);
+}
+.username {
+  color: var(--tbd-active);
 }
 
 mat-divider {
-    border-right-color: var(--tbd-main);
+  border-right-color: var(--tbd-main);
 }
 
 .header-username {
