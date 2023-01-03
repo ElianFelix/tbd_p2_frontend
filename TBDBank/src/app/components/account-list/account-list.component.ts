@@ -24,9 +24,11 @@ export class AccountListComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAccounts();
     this.accounts = this.service.fetchAccounts();
+
     this.user$ = this.uService.getUser(
       this.authService.getLoggedInUser() || ''
     );
+
     this.service.accountsUpdated.subscribe(() => {
       this.accounts = this.service.fetchAccounts();
     });
