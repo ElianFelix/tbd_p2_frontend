@@ -27,6 +27,8 @@ export class AuthService {
       );
   }
 
+  validatePassword() {}
+
   private setJwtSession(resBody: { username: string; accessToken: string }) {
     localStorage.setItem('id_token', resBody.accessToken);
     localStorage.setItem('active_user', resBody.username);

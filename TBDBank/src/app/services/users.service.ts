@@ -14,7 +14,7 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   getUser(userName: string) {
-    return this.http.get<UserDetails>(this.usersUrl + userName);
+    return this.http.get<UserDetails>(this.usersUrl + '/' + userName);
   }
 
   userExists(userName: string) {
@@ -30,5 +30,25 @@ export class UsersService {
     return this.http.post<{ result: boolean }>(this.usersUrl, userForm, {
       headers: { 'content-type': 'application/json' },
     });
+  }
+
+  updateUserdetails(userForm: UserDetails) {
+    return this.http.put<{ result: boolean }>(
+      this.usersUrl + '/' + userForm.username,
+      userForm,
+      {
+        headers: { 'content-type': 'application/json' },
+      }
+    );
+  }
+
+  updateUserPassword(username: string, password: string) {
+    return this.http.put<{ result: boolean }>(
+      this.usersUrl + '/' + username + '/change-pswd',
+      password,
+      {
+        headers: { 'content-type': 'application/json' },
+      }
+    );
   }
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserDetails } from 'src/app/models/UserDetails';
+import { AuthService } from 'src/app/services/auth.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,9 +17,46 @@ export class UserProfileComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
   });
 
-  CurrentProfileState: UserDetails;
+  currentProfileState: UserDetails;
+
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.usersService
+      .getUser(String(this.authService.getLoggedInUser()))
+      .subscribe((res) => {
+        this.currentProfileState = res;
+        this.getUserDetails();
+      });
+  }
+
+  getUserDetails() {
+    this.profileForm.setValue({
+      firstName: String(this.currentProfileState.firstName),
+      lastName: String(this.currentProfileState.lastName),
+      email: String(this.currentProfileState.email),
+    });
+  }
+
+  getCurrentUsername() {
+    return this.authService.getLoggedInUser();
+  }
+
+  onSubmit() {
+    if (this.profileForm.valid) {
+      this.currentProfileState = {
+        username: this.currentProfileState.username,
+        firstName: String(this.profileForm.value.firstName),
+        lastName: String(this.profileForm.value.lastName),
+        email: String(this.profileForm.value.email),
+        password: this.currentProfileState.password,
+      };
+
+      this.usersService.updateUserdetails(this.currentProfileState).subscribe();
+    }
   }
 }
