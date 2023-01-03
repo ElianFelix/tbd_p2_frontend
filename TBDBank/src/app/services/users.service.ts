@@ -31,4 +31,24 @@ export class UsersService {
       headers: { 'content-type': 'application/json' },
     });
   }
+
+  updateUserdetails(userForm: UserDetails) {
+    return this.http.put<{ result: boolean }>(
+      this.usersUrl + '/' + userForm.username,
+      userForm,
+      {
+        headers: { 'content-type': 'application/json' },
+      }
+    );
+  }
+
+  updateUserPassword(username: string, password: string) {
+    return this.http.put<{ result: boolean }>(
+      this.usersUrl + '/' + username + '/change-pswd',
+      password,
+      {
+        headers: { 'content-type': 'application/json' },
+      }
+    );
+  }
 }

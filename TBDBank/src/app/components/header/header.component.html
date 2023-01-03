@@ -155,7 +155,7 @@
             >
           </li>
           <li class="nav-item align-text-center" *ngIf="isLoggedIn()">
-            <p class="nav-link header-username">{{ this.getLoggedInUser() }}</p>
+            <p class="nav-link username">{{ this.getLoggedInUser() }}</p>
           </li>
           <li class="nav-item" *ngIf="isLoggedIn()">
             <a class="nav-link theme-toggler" (click)="logout()">Logout</a>
