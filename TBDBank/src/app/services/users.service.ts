@@ -14,7 +14,7 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   getUser(userName: string) {
-    return this.http.get<UserDetails>(this.usersUrl + userName);
+    return this.http.get<UserDetails>(this.usersUrl + '/' + userName);
   }
 
   userExists(userName: string) {
