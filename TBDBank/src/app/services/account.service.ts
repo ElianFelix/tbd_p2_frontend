@@ -13,7 +13,7 @@ export class AccountService {
 
   url: string = environment.API_URL + 'accounts';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   createNewAccount(account: Account): Observable<boolean> {
     return this.http.post<boolean>(this.url, account, {
