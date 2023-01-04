@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Components
@@ -34,10 +34,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
 import { AccountComponent } from './components/account/account.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ChangePswdFormComponent } from './components/change-pswd-form/change-pswd-form.component';
 
 //Global services
 import { AuthInterceptorInterceptor } from './services/auth-interceptor.interceptor';
-
+import { PasswordMatchDirective } from './password-match.directive';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,8 @@ import { AuthInterceptorInterceptor } from './services/auth-interceptor.intercep
     CreateTransferComponent,
     AccountComponent,
     UserProfileComponent,
+    ChangePswdFormComponent,
+    PasswordMatchDirective,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ import { AuthInterceptorInterceptor } from './services/auth-interceptor.intercep
     MatDividerModule,
     MatSelectModule,
     MatPaginatorModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

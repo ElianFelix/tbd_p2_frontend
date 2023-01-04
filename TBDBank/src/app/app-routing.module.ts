@@ -9,6 +9,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AccountListComponent } from './components/account-list/account-list.component';
 import { CreateTransferComponent } from './components/create-transfer/create-transfer.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ChangePswdFormComponent } from './components/change-pswd-form/change-pswd-form.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
   {
     path: 'profile',
     component: UserProfileComponent,
+    children: [{ path: 'change-pswd', component: ChangePswdFormComponent }],
   },
   {
     path: 'account/:id',
