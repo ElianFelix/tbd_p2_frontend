@@ -6,6 +6,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { forkJoin, switchMap } from 'rxjs';
 import { Account } from 'src/app/models/Account';
@@ -45,7 +46,8 @@ export class CreateTransferComponent implements OnInit {
     private accountService: AccountService,
     private transactionService: TransactionsService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -129,6 +131,7 @@ export class CreateTransferComponent implements OnInit {
           .subscribe((res) => {
             console.log(res);
             this.accountService.getAccounts();
+            this._snackbar.open('Success!', 'close', {duration: 5000});
             this.router.navigate(['/accounts']);
           });
       }
