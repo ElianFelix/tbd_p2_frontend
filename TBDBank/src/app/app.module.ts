@@ -42,11 +42,12 @@ import { CreateRequestComponent } from './components/create-request/create-reque
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { RequestsComponent } from './components/requests/requests.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ChangePswdFormComponent } from './components/change-pswd-form/change-pswd-form.component';
 
 //Global services
 import { AuthInterceptorInterceptor } from './services/auth-interceptor.interceptor';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
-
+import { PasswordMatchDirective } from './password-match.directive';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,8 @@ import { CreateAccountComponent } from './components/create-account/create-accou
     RequestsComponent,
     UserProfileComponent,
     CreateAccountComponent,
+    ChangePswdFormComponent,
+    PasswordMatchDirective,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserDetails } from 'src/app/models/UserDetails';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,7 +23,9 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private _snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +59,19 @@ export class UserProfileComponent implements OnInit {
         password: this.currentProfileState.password,
       };
 
-      this.usersService.updateUserdetails(this.currentProfileState).subscribe();
+      this.usersService
+        .updateUserdetails(this.currentProfileState)
+        .subscribe((res) => {
+          if (res.result) this.successNotify();
+        });
     }
+  }
+
+  successNotify() {
+    this._snackbar.open('Updated profile', 'close', { duration: 5000 });
+  }
+
+  openPasswordMenu() {
+    this.router.navigate(['./change-pswd'], { relativeTo: this.route });
   }
 }
