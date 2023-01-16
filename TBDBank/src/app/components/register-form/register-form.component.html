@@ -58,7 +58,25 @@
           </mat-form-field>
         </div>
       </div>
-      <app-button (btnClick)="onSubmit()">Register</app-button>
+      <div class="row justify-content-center">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Re-Password</mat-label>
+            <input
+              matInput
+              type="password"
+              placeholder="Re-enter your password"
+              formControlName="repassword"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-error *ngIf="registerForm.hasError('passwordMismatch')"
+        >Passwords don't match</mat-error
+      >
+      <app-button (btnClick)="onSubmit()" [disabled]="registerForm.invalid"
+        >Register</app-button
+      >
     </form>
   </div>
 </app-modal>

@@ -21,9 +21,17 @@ export class RegisterFormComponent {
       Validators.required,
       Validators.minLength(5),
     ]),
+    repassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+    ]),
   });
 
-  constructor(private usersService: UsersService, private location: Location, private _snackbar:MatSnackBar) {}
+  constructor(
+    private usersService: UsersService,
+    private location: Location,
+    private _snackbar: MatSnackBar
+  ) {}
 
   onSubmit() {
     if (this.registerForm.valid) {
@@ -53,7 +61,7 @@ export class RegisterFormComponent {
   resultCheck(result: boolean) {
     if (result) {
       this.location.back();
-      this._snackbar.open('User Registered', 'close', {duration: 5000});
+      this._snackbar.open('User Registered', 'close', { duration: 5000 });
     } else {
       alert('This username already exists');
     }
